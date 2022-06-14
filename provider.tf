@@ -1,3 +1,3 @@
 provider "" {
-  provider="abcd"
+  provider="xyz_abcd"
 }
