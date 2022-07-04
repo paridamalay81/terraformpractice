@@ -1,4 +1,4 @@
 resource "google_compute_address" "saticipForLB" {
   name = "staticipforlb"
-  address_type = "EXTERNAL"
+  address_type = "INTERNAL"
 }
