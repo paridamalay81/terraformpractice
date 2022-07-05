@@ -1,7 +1,22 @@
 resource "google_compute_instance" "backend_instance" {
-  name = var.backend_instance_name
-  zone = var.instance_zone
+  name         = var.backend_instance_name
+  machine_type = "e2-medium"
+  zone         = var.instance_zone
+  tags = [webserver]
+
+  boot_disk {
+    initialize_params {
+      image = "CentOS 7"
+    }
+  }
+  metadata_startup_script = <<-EOF
+    #!/bin/bash
+    apt update 
+    apt -y install apache2
+    echo "Hello world from $(hostname) $(hostname -I)" > /var/www/html/index.html
+  EOF
 }
+
 resource "google_compute_instance_group" "backend-instance-group" {
   name = var.instance_group_name
   zone = var.instance_zone
