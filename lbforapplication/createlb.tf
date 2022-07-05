@@ -2,7 +2,7 @@ resource "google_compute_instance" "backend_instance" {
   name         = var.backend_instance_name
   machine_type = "e2-medium"
   zone         = var.instance_zone
-  tags = [webserver]
+  tags = ["webserver"]
 
   boot_disk {
     initialize_params {
@@ -79,7 +79,7 @@ resource "google_compute_forwarding_rule" "frontend_http" {
 resource "google_compute_region_target_http_proxy" "proxy_http" {
   name     = "proxy_http"
   region   = var.region
-  url_map  = google_compute_region_url_map.http_url_map.id
+  url_map  = google_compute_region_url_map.url_map.id
 }
 resource "google_compute_forwarding_rule" "frontend_https" {
   name                  = "frontend_https"
