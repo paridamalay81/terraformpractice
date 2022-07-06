@@ -9,6 +9,9 @@ resource "google_compute_instance" "backend_instance" {
       image = "CentOS 7"
     }
   }
+  network_interface {
+    network = "default"
+  }
   metadata_startup_script = <<-EOF
     #!/bin/bash
     apt update 
@@ -68,8 +71,8 @@ resource "google_compute_health_check" "backend_service-health_check" {
 }
 resource "google_compute_forwarding_rule" "frontend_http" {
   name                  = "frontend_http"
+   ip_address            = google_compute_address.saticipForLB
   region                = var.region
-  depends_on            = [google_compute_subnetwork.proxy_subnet]
   ip_protocol           = "HTTP"
   load_balancing_scheme = "INTERNAL_MANAGED"
   port_range            = "80"
@@ -83,8 +86,8 @@ resource "google_compute_region_target_http_proxy" "proxy_http" {
 }
 resource "google_compute_forwarding_rule" "frontend_https" {
   name                  = "frontend_https"
+  ip_address            = google_compute_address.saticipForLB
   region                = var.region
-  depends_on            = [google_compute_subnetwork.proxy_subnet]
   ip_protocol           = "HTTPS"
   load_balancing_scheme = "INTERNAL_MANAGED"
   port_range            = "443"
