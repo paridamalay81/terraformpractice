@@ -53,6 +53,7 @@ resource "google_compute_region_backend_service" "backend_service_https" {
   backend {
     group = google_compute_instance_group.backend-instance-group-http.id
     balancing_mode = "UTILIZATION"
+    capacity_scaler = 1.0
   }
 }
 resource "google_compute_region_backend_service" "backend_service_http" {
@@ -66,6 +67,7 @@ resource "google_compute_region_backend_service" "backend_service_http" {
   backend {
     group = google_compute_instance_group.backend-instance-group-http.id
     balancing_mode = "UTILIZATION"
+    capacity_scaler = 1.0
   }
 }
 resource "google_compute_forwarding_rule" "frontend_http" {
@@ -161,4 +163,18 @@ resource "google_compute_region_url_map" "url_map" {
     name            = "https_path"
     default_service = google_compute_region_backend_service.backend_service_https.id
   }
+}
+resource "google_compute_firewall" "lb-firewall" {
+  name    = "lb-firewall"
+  network = google_compute_network.default.name
+  allow {
+    protocol = "http"
+    ports    = ["80"]
+  }
+
+  source_tags = ["webserver"]
+}
+
+resource "google_compute_network" "default" {
+  name = "test-network"
 }
