@@ -6,7 +6,7 @@ resource "google_compute_instance" "backend_instance" {
 
   boot_disk {
     initialize_params {
-      image = "CentOS 7"
+      image = "centos-7-v20220303"
     }
   }
   network_interface {
@@ -20,8 +20,8 @@ resource "google_compute_instance" "backend_instance" {
   EOF
 }
 
-resource "google_compute_instance_group" "backend-instance-group" {
-  name = var.instance_group_name
+resource "google_compute_instance_group" "backend-instance-group-http" {
+  name = "${var.instance_group_name}-http"
   zone = var.instance_zone
   instances = [ google_compute_instance.backend_instance.id ]
   named_port {
@@ -32,36 +32,9 @@ resource "google_compute_instance_group" "backend-instance-group" {
     name = "https"
     port = "443"
   }
-
 }
-resource "google_compute_region_backend_service" "backend_service_https" {
-  name = "backend_service_https"
-  load_balancing_scheme = "INTERNAL_MANAGED"
-  locality_lb_policy = "ROUND_ROBIN"
-  session_affinity = "NONE"
-  protocol = "HTTPS"
-  port_name = "https"
-  health_checks = [google_compute_health_check.backend_service-health_check.id]
-  backend {
-    group = google_compute_instance_group.backend-instance-group.id
-    balancing_mode = "UTILIZATION"
-  }
-}
-resource "google_compute_region_backend_service" "backend_service_http" {
-  name = "backend_service_http"
-  load_balancing_scheme = "INTERNAL_MANAGED"
-  locality_lb_policy = "ROUND_ROBIN"
-  session_affinity = "NONE"
-  protocol = "HTTP"
-  port_name = "http"
-  health_checks = [google_compute_health_check.backend_service-health_check.id]
-  backend {
-    group = google_compute_instance_group.backend-instance-group.id
-    balancing_mode = "UTILIZATION"
-  }
-}
-resource "google_compute_health_check" "backend_service-health_check" {
-  name               = "backend_service-health_check"
+resource "google_compute_health_check" "backend-service-health-check" {
+  name               = "backend-service-health-check"
   check_interval_sec = 1
   timeout_sec        = 1
 
@@ -69,8 +42,34 @@ resource "google_compute_health_check" "backend_service-health_check" {
     port = "80"
   }
 }
+resource "google_compute_region_backend_service" "backend_service_https" {
+  name = "backend-service-https"
+  load_balancing_scheme = "INTERNAL_MANAGED"
+  locality_lb_policy = "ROUND_ROBIN"
+  session_affinity = "NONE"
+  protocol = "HTTPS"
+  port_name = "https"
+  health_checks = [google_compute_health_check.backend-service-health-check.id]
+  backend {
+    group = google_compute_instance_group.backend-instance-group-http.id
+    balancing_mode = "UTILIZATION"
+  }
+}
+resource "google_compute_region_backend_service" "backend_service_http" {
+  name = "backend-service-http"
+  load_balancing_scheme = "INTERNAL_MANAGED"
+  locality_lb_policy = "ROUND_ROBIN"
+  session_affinity = "NONE"
+  protocol = "HTTP"
+  port_name = "http"
+  health_checks = [google_compute_health_check.backend-service-health-check.id]
+  backend {
+    group = google_compute_instance_group.backend-instance-group-http.id
+    balancing_mode = "UTILIZATION"
+  }
+}
 resource "google_compute_forwarding_rule" "frontend_http" {
-  name                  = "frontend_http"
+  name                  = "frontend-http"
   ip_address            = google_compute_address.saticipForLB.id
   region                = var.region
   ip_protocol           = "HTTP"
@@ -80,12 +79,12 @@ resource "google_compute_forwarding_rule" "frontend_http" {
   network_tier          = "PREMIUM"
 }
 resource "google_compute_region_target_http_proxy" "proxy_http" {
-  name     = "proxy_http"
+  name     = "proxy-http"
   region   = var.region
   url_map  = google_compute_region_url_map.url_map.id
 }
 resource "google_compute_forwarding_rule" "frontend_https" {
-  name                  = "frontend_https"
+  name                  = "frontend-https"
   ip_address            = google_compute_address.saticipForLB.id
   region                = var.region
   ip_protocol           = "HTTPS"
@@ -95,7 +94,7 @@ resource "google_compute_forwarding_rule" "frontend_https" {
   network_tier          = "PREMIUM"
 }
 resource "google_compute_region_target_https_proxy" "proxy_https" {
-  name     = "proxy_https"
+  name     = "proxy-https"
   region   = var.region
   url_map  = google_compute_region_url_map.url_map.id
   ssl_certificates = [google_compute_region_ssl_certificate.default.self_link]
@@ -142,7 +141,7 @@ resource "tls_self_signed_cert" "default" {
 }
 # URL map
 resource "google_compute_region_url_map" "url_map" {
-  name            = "http_url_map"
+  name            = "http-url-map"
   region          = var.region
   default_service = google_compute_region_backend_service.backend_service_https.id
  
