@@ -72,7 +72,7 @@ resource "google_compute_region_backend_service" "backend_service_http" {
 }
 resource "google_compute_forwarding_rule" "frontend_http" {
   name                  = "frontend-http"
-  ip_address            = google_compute_address.saticipForLB.id
+  ip_address            = google_compute_address.saticipForLB.address
   region                = var.region
   ip_protocol           = "HTTP"
   load_balancing_scheme = "INTERNAL_MANAGED"
@@ -87,7 +87,7 @@ resource "google_compute_region_target_http_proxy" "proxy_http" {
 }
 resource "google_compute_forwarding_rule" "frontend_https" {
   name                  = "frontend-https"
-  ip_address            = google_compute_address.saticipForLB.id
+  ip_address            = google_compute_address.saticipForLB.address
   region                = var.region
   ip_protocol           = "HTTPS"
   load_balancing_scheme = "INTERNAL_MANAGED"
@@ -149,18 +149,18 @@ resource "google_compute_region_url_map" "url_map" {
  
   host_rule {
     hosts        = ["${var.host_name}:80"]
-    path_matcher = "http_path"
+    path_matcher = "http-path"
   }
   host_rule {
     hosts        = ["${var.host_name}:443"]
-    path_matcher = "https_path"
+    path_matcher = "https-path"
   }
   path_matcher {
-    name            = "http_path"
+    name            = "http-path"
     default_service = google_compute_region_backend_service.backend_service_http.id
   }
   path_matcher {
-    name            = "https_path"
+    name            = "https-path"
     default_service = google_compute_region_backend_service.backend_service_https.id
   }
 }
@@ -168,7 +168,7 @@ resource "google_compute_firewall" "lb-firewall" {
   name    = "lb-firewall"
   network = google_compute_network.default.name
   allow {
-    protocol = "http"
+    protocol = "tcp"
     ports    = ["80"]
   }
 
