@@ -11,6 +11,9 @@ resource "google_compute_instance" "backend_instance" {
   }
   network_interface {
     network = "default"
+    access_config {
+      
+    }
   }
   metadata_startup_script = <<-EOF
     #!/bin/bash
