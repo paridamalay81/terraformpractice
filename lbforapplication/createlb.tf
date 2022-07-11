@@ -36,7 +36,7 @@ resource "google_compute_instance_group" "backend-instance-group-http" {
     port = "443"
   }
 }
-resource "google_compute_health_check" "backend-service-health-check" {
+resource "google_compute_region_health_check" "backend-service-health-check" {
   name               = "backend-service-health-check"
   check_interval_sec = 1
   timeout_sec        = 1
@@ -52,7 +52,7 @@ resource "google_compute_region_backend_service" "backend_service_https" {
   session_affinity = "NONE"
   protocol = "HTTPS"
   port_name = "https"
-  health_checks = [google_compute_health_check.backend-service-health-check.id]
+  health_checks = [google_compute_region_health_check.backend-service-health-check.id]
   backend {
     group = google_compute_instance_group.backend-instance-group-http.id
     balancing_mode = "UTILIZATION"
@@ -66,7 +66,7 @@ resource "google_compute_region_backend_service" "backend_service_http" {
   session_affinity = "NONE"
   protocol = "HTTP"
   port_name = "http"
-  health_checks = [google_compute_health_check.backend-service-health-check.id]
+  health_checks = [google_compute_region_health_check.backend-service-health-check.id]
   backend {
     group = google_compute_instance_group.backend-instance-group-http.id
     balancing_mode = "UTILIZATION"
@@ -169,7 +169,7 @@ resource "google_compute_region_url_map" "url_map" {
 }
 resource "google_compute_firewall" "lb-firewall" {
   name    = "lb-firewall"
-  network = google_compute_network.default.name
+  network = "default"
   allow {
     protocol = "tcp"
     ports    = ["80"]
