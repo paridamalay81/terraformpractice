@@ -78,7 +78,7 @@ resource "google_compute_forwarding_rule" "frontend_http" {
   ip_address            = google_compute_address.saticipForLB.address
   region                = var.region
   ip_protocol           = "HTTP"
-  load_balancing_scheme = "INTERNAL_MANAGED"
+  load_balancing_scheme = "EXTERNAL_MANAGED"
   port_range            = "80"
   target                = google_compute_region_target_http_proxy.proxy_http.id
   network_tier          = "PREMIUM"
@@ -93,7 +93,7 @@ resource "google_compute_forwarding_rule" "frontend_https" {
   ip_address            = google_compute_address.saticipForLB.address
   region                = var.region
   ip_protocol           = "HTTPS"
-  load_balancing_scheme = "INTERNAL_MANAGED"
+  load_balancing_scheme = "EXTERNAL_MANAGED"
   port_range            = "443"
   target                = google_compute_region_target_https_proxy.proxy_https.id
   network_tier          = "PREMIUM"
@@ -179,5 +179,5 @@ resource "google_compute_firewall" "lb-firewall" {
 }
 
 resource "google_compute_network" "default" {
-  name = "test-network"
+  name = "default"
 }
