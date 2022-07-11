@@ -47,7 +47,7 @@ resource "google_compute_health_check" "backend-service-health-check" {
 }
 resource "google_compute_region_backend_service" "backend_service_https" {
   name = "backend-service-https"
-  load_balancing_scheme = "INTERNAL_MANAGED"
+  load_balancing_scheme = "EXTERNAL_MANAGED"
   locality_lb_policy = "ROUND_ROBIN"
   session_affinity = "NONE"
   protocol = "HTTPS"
@@ -61,7 +61,7 @@ resource "google_compute_region_backend_service" "backend_service_https" {
 }
 resource "google_compute_region_backend_service" "backend_service_http" {
   name = "backend-service-http"
-  load_balancing_scheme = "INTERNAL_MANAGED"
+  load_balancing_scheme = "EXTERNAL_MANAGED"
   locality_lb_policy = "ROUND_ROBIN"
   session_affinity = "NONE"
   protocol = "HTTP"
@@ -176,8 +176,4 @@ resource "google_compute_firewall" "lb-firewall" {
   }
 
   source_tags = ["webserver"]
-}
-
-resource "google_compute_network" "default" {
-  name = "default"
 }
