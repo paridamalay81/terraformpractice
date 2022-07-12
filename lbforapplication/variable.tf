@@ -10,3 +10,7 @@ variable "backend_instance_name" {
 variable "host_name" {
   
 }
+
+variable "test2" {
+  
+}
