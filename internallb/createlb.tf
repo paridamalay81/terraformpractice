@@ -66,9 +66,12 @@ resource "google_compute_backend_service" "http-backend" {
 
 resource "google_compute_region_health_check" "default" {
   name               = "health-check"
-  request_path       = "/"
-  check_interval_sec = 1
-  timeout_sec        = 1
+  timeout_sec         = 10
+  check_interval_sec  = 5
+  http_health_check {
+    port = "80"
+    request_path       = "/"
+  }
 }
 resource "google_compute_instance_group" "backend-instance-grp" {
   name        = "webservers"
