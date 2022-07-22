@@ -1,6 +1,6 @@
 
 resource "google_compute_instance" "backend_instance" {
-  name         = "backend_instance"
+  name         = "backend-instance"
   machine_type = "e2-medium"
   zone         = "us-central1-a"
   tags = ["webserver"]
