@@ -56,7 +56,7 @@ resource "google_compute_url_map" "http-url" {
 }
 resource "google_compute_backend_service" "http-backend" {
   name          = "http-backend"
-  health_checks = [google_compute_http_health_check.default.id]
+  health_checks = [google_compute_region_health_check.default.id]
   load_balancing_scheme = "EXTERNAL_MANAGED"
   locality_lb_policy = "ROUND_ROBIN"
   backend {
@@ -64,7 +64,7 @@ resource "google_compute_backend_service" "http-backend" {
   }
 }
 
-resource "google_compute_http_health_check" "default" {
+resource "google_compute_region_health_check" "default" {
   name               = "health-check"
   request_path       = "/"
   check_interval_sec = 1
