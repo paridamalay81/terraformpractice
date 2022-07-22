@@ -1,5 +1,5 @@
 resource "google_compute_instance" "backend_instance" {
-  name         = var.backend_instance_name
+  name         = "backend-instance"
   machine_type = "e2-medium"
   zone         = var.instance_zone
   tags = ["webserver"]
@@ -25,7 +25,7 @@ resource "google_compute_instance" "backend_instance" {
 }
 
 resource "google_compute_instance_group" "backend-instance-group-http" {
-  name = "${var.instance_group_name}-http"
+  name = "instance-http"
   zone = var.instance_zone
   instances = [ google_compute_instance.backend_instance.id ]
   named_port {
