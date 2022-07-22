@@ -59,6 +59,7 @@ resource "google_compute_backend_service" "http-backend" {
   health_checks = [google_compute_health_check.default.id]
   load_balancing_scheme = "EXTERNAL_MANAGED"
   locality_lb_policy = "ROUND_ROBIN"
+   protocol = "HTTP"
   backend {
     group = google_compute_instance_group.backend-instance-grp.id
   }
