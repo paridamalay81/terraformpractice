@@ -49,7 +49,7 @@ resource "google_compute_url_map" "http-url" {
     default_service = google_compute_backend_service.http-backend.id
 
     path_rule {
-      paths   = ["/*"]
+      paths   = ["/"]
       service = google_compute_backend_service.http-backend.id
     }
   }
