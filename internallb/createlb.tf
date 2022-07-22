@@ -64,9 +64,9 @@ resource "google_compute_backend_service" "http-backend" {
   }
 }
 
-resource "google_compute_region_health_check" "default" {
+resource "google_compute_health_check" "default" {
   name               = "health-check"
-  timeout_sec         = 10
+  timeout_sec         = 5
   check_interval_sec  = 5
   http_health_check {
     port = "80"
