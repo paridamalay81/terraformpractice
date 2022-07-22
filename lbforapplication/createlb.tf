@@ -17,8 +17,9 @@ resource "google_compute_instance" "backend_instance" {
   }
   metadata_startup_script = <<-EOF
     #!/bin/bash
-    apt update 
-    apt -y install apache2
+    sudo yum update httpd
+    sudo yum install httpd -y
+    sudo systemctl start httpd
     echo "Hello world from $(hostname) $(hostname -I)" > /var/www/html/index.html
   EOF
 }
