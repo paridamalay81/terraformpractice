@@ -88,3 +88,13 @@ resource "google_compute_instance_group" "backend-instance-grp" {
   }
   zone = "us-central1-a"
 }
+resource "google_compute_firewall" "default" {
+  name    = "test-firewall"
+  network = "default"
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
+  }
+
+  target_tags = ["webserver"]
+}
