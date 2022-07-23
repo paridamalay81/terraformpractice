@@ -28,7 +28,6 @@ resource "google_compute_global_forwarding_rule" "frontend-http"{
     name = "frontend-http"
     target = google_compute_target_http_proxy.http-proxy.id
     ip_address = google_compute_global_address.saticipForLB.id
-    network = "default"
     load_balancing_scheme = "EXTERNAL_MANAGED"
     port_range = "80"
 }
