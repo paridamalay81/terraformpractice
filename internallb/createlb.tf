@@ -32,7 +32,7 @@ resource "google_compute_global_forwarding_rule" "frontend-http"{
     load_balancing_scheme = "EXTERNAL_MANAGED"
     port_range = "80"
 }
-resource "  proxy" "http-proxy" {
+resource "google_compute_target_http_proxy" "http-proxy" {
   name    = "http-proxy"
   url_map = google_compute_url_map.http-url.id
 }
