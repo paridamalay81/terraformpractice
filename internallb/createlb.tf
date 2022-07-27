@@ -131,7 +131,7 @@ resource "google_compute_global_forwarding_rule" "frontend-https" {
   ip_protocol = "HTTPS"
   port_range = "443"
   load_balancing_scheme = "EXTERNAL_MANAGED"
-  locality_lb_policy = "ROUND_ROBIN"
+  
 }
 resource "google_compute_target_https_proxy" "proxy-https" {
   name = "proxy-https"
