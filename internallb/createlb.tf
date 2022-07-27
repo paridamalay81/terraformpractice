@@ -199,6 +199,7 @@ resource "google_compute_backend_service" "https-backend" {
   name = "https-backend"
   health_checks = [ google_compute_health_check.default.id ]
   protocol = "HTTPS"
+  load_balancing_scheme = "EXTERNAL_MANAGED"
   backend {
     group = google_compute_instance_group.instance-https.id
   }
