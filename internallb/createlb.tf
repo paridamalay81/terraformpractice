@@ -131,7 +131,7 @@ resource "google_compute_global_forwarding_rule" "frontend-https" {
   ip_protocol = "HTTPS"
   port_range = "443"
   load_balancing_scheme = "EXTERNAL_MANAGED"
-  locality_lb_policy = "ROUND_ROBIN"
+  
 }
 resource "google_compute_target_https_proxy" "proxy-https" {
   name = "proxy-https"
@@ -171,7 +171,7 @@ resource "tls_private_key" "default" {
 }
 
 resource "tls_self_signed_cert" "default" {
-  key_algorithm   = "RSA"
+  
   private_key_pem = tls_private_key.default.private_key_pem
 
   # Certificate expires after 12 hours.
@@ -199,6 +199,7 @@ resource "google_compute_backend_service" "https-backend" {
   name = "https-backend"
   health_checks = [ google_compute_health_check.default.id ]
   protocol = "HTTPS"
+  load_balancing_scheme = "EXTERNAL_MANAGED"
   backend {
     group = google_compute_instance_group.instance-https.id
   }
