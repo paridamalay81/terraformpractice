@@ -1,7 +1,7 @@
 resource "google_compute_instance" "instance_vm_machines" {
     count = length(var.instance_name)
-    name = var.instance_name[count]
-    zone = substr(var.instance_name,0,3)=="mgo"?"us-east1-a":"us-east1-c"
+    name = var.instance_name[count.index]
+    zone = substr(lower(var.instance_name[count.index]),0,3)=="mgo"?"us-east1-a":"us-east1-c"
     machine_type = "e2-medium"
     
     tags = ["webserver"]
