@@ -4,5 +4,5 @@ variable "environment" {
   description = "Need to Enter dev or prod environment"
 }
 variable "vm-instance-number" {
-  value = var.environment == "dev" ? 1 : 3  
+  default = var.environment == "dev" ? 1 : 3  
 }
