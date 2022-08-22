@@ -24,5 +24,5 @@ resource "google_compute_instance" "vm-machines" {
     sudo systemctl start httpd
     echo "Hello world from $(hostname) $(hostname -I)" > /var/www/html/index.html
   EOF
-  count = var.vm-instance-number
+  count = var.environment == "dev" ? 1 : 3
 }
