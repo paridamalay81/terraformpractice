@@ -1,5 +1,8 @@
 data "google_compute_zones" "available-zones" {
-  status = UP
+  status = "UP"
+}
+locals {
+  lo-available-zones = data.google_compute_zones.available-zones
 }
 resource "google_compute_instance" "vm-machines" {
   name = "vm-instance-${count.index}"
