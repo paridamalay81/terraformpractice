@@ -1,8 +1,9 @@
+#for variables
 variable "instance_name" {
-  type = "list(string)"
+  type = list(string)
 }
 variable "instance_zone" {
-  type = "map"
+  type = map
   default = {
     1 = "us-east1"
     2 = "us-central1"
