@@ -1,9 +1,9 @@
 resource "google_compute_instance" "vm-machines" {
   name = "vm-instance-${count.index}"
   machine_type = "e2-medium"
-  zone = lookup(var.instance_zone,substr(var.instance_name[${count.index}],0,3) == "mgo" ? 1 : 2,"us-west1")
+  zone = lookup(var.instance_zone,substr(var.instance_name["${count.index}"],0,3) == "mgo" ? 1 : 2,"us-west1")
   tags = ["webserver"]
-  count = var.instance_name  
+  count = length(var.instance_name)
   boot_disk {
     initialize_params {
       image = "centos-7-v20220303"
