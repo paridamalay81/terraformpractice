@@ -1,5 +1,5 @@
 locals {
-  lo_instance_name_prefix = substring(var.instance_name,0,3) == "mgo" ? 1 : 2
+  lo_instance_name_prefix = substr(var.instance_name,0,3) == "mgo" ? 1 : 2
 }
 locals {
   lo_instance_zone = lookup(var.instance_zone,local.lo_instance_name_prefix,"us-west1")
