@@ -15,12 +15,15 @@ resource "google_compute_instance" "vm-machines" {
       
     }
   }
-  metadata_startup_script = <<-EOF
-    #!/bin/bash
-    sudo yum update httpd
-    sudo yum install httpd -y
-    sudo systemctl start httpd
-    echo "Hello world from $(hostname) $(hostname -I)" > /var/www/html/index.html
-  EOF
-  
+  provisioner "remote-exec" {
+    scripts = [
+      ./install_run_apache_http_80.sh
+    ]
+    connection {
+      type = ssh
+      user = var.username
+      host_key = var.key-ssh
+    }
+  }
+   
 }

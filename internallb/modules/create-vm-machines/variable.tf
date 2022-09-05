@@ -9,3 +9,9 @@ variable "instance_zone" {
     2 = "us-central1"
   }
 }
+variable "username" {
+  
+}
+variable "key-ssh" {
+  
+}

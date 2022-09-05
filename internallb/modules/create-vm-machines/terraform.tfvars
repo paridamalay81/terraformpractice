@@ -1,1 +1,1 @@
-instance_name = ["mgoaapscd1","jfbapscd1"]
+instance_name = ["mgoaapscd1"]
