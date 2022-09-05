@@ -17,7 +17,7 @@ resource "google_compute_instance" "vm-machines" {
   }
   provisioner "remote-exec" {
     scripts = [
-      ./install_run_apache_http_80.sh
+      install_run_apache_http_80.sh
     ]
     connection {
       type = ssh
