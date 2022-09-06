@@ -15,12 +15,11 @@ resource "google_compute_forwarding_rule" "frontend" {
   port_range = var.port-list
 }
 resource "google_compute_region_backend_service" "backend" {
-  project          = var.project_id
-  name             = "${var.service_name}-tcp"
-  region           = var.region
-  protocol         = var.backend_protocol
+  
+  name             = "tcp-lb-test"
+  region           = "us-central1"
+  protocol         = "tcp"
   timeout_sec      = 10
-  session_affinity = var.session_affinity
   backend {
     group          = google_compute_instance_group.instance_group.id
     balancing_mode = "CONNECTION"
@@ -37,13 +36,11 @@ resource "google_compute_region_backend_service" "backend" {
 }
 
 resource "google_compute_health_check" "tcp_health_check" {
-  count = var.http_health_check ? 0 : 1
-
-  project = var.project_id
-  name    = "${var.service_name}-hc"
+ 
+  name    = "tcp-hc"
 
   tcp_health_check {
-    port = var.health_check_port
+    port = "80"
   }
 
   log_config {
@@ -52,17 +49,28 @@ resource "google_compute_health_check" "tcp_health_check" {
 }
 
 resource "google_compute_health_check" "http_health_check" {
-  count = var.http_health_check ? 1 : 0
+  
 
-  project = var.project_id
-  name    = "${var.service_name}-hc"
+ name    = "http-hc"
 
   http_health_check {
-    port = var.health_check_port
+    port = "80"
   }
 
   log_config {
     enable = true
   }
 
+}
+resource "google_compute_instance_group" "instance_group" {
+  name        = "myinstancegrp"
+  description = "${var.service_name} Unmanaged Instance Group"
+  instances = [
+    data.google_compute_instance.instance.self_link,
+  ]
+  named_port {
+    name = "http"
+    port = "80"
+  }
+  zone = "us-central1-a"
 }
