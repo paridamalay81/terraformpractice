@@ -1,1 +1,1 @@
-instance_name = ["mgoaapscd1"]
+port-list="80.2220,2099"
