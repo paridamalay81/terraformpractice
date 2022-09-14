@@ -5,7 +5,7 @@ resource "google_compute_instance" "vm-machines" {
   tags = ["webserver"]
   count = length(var.instance_name)
   metadata = {
-    ssh-keys=var.key-ssh
+    ssh-keys="${var.username}:${var.key-ssh}"
   }
   boot_disk {
     initialize_params {
@@ -15,7 +15,7 @@ resource "google_compute_instance" "vm-machines" {
   network_interface {
     network = "default"
     access_config {
-      
+
     }
   }
   provisioner "remote-exec" {
@@ -24,10 +24,10 @@ resource "google_compute_instance" "vm-machines" {
     ]
     connection {
       type = "ssh"
-      host = google_compute_instance.vm-machines[count.index].network_interface.0.network_ip 
+      host = google_compute_instance.vm-machines[count.index].network_interface.0.network_ip
       user = var.username
-      host_key = var.key-ssh
+      private_key= "${file("~/.ssh/id_rsa")}"
     }
   }
-   
+
 }

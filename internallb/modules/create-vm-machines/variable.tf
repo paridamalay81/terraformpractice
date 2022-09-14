@@ -10,8 +10,11 @@ variable "instance_zone" {
   }
 }
 variable "username" {
-  
+
 }
 variable "key-ssh" {
-  
+
 }
+variable "key-ssh-private" {
+
+}      
