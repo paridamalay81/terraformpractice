@@ -29,5 +29,14 @@ resource "google_compute_instance" "vm-machines" {
       private_key= "${file("~/.ssh/id_rsa")}"
     }
   }
+  }
+  resource "google_compute_firewall" "default" {
+  name    = "test-firewall"
+  network = "default"
+   allow {
+    protocol = "ssh"
+    ports    = ["80"]
+  }
 
+  source_tags = ["webserver"]
 }
