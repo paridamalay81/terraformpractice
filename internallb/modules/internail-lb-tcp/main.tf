@@ -12,7 +12,7 @@ resource "google_compute_forwarding_rule" "frontend" {
   backend_service       = google_compute_region_backend_service.backend.self_link
   ip_address            = google_compute_address.vip_address.address
   ip_protocol           = "tcp"
-  port_range = var.port-list
+  ports = ["2020","2121"]
 }
 resource "google_compute_region_backend_service" "backend" {
   
@@ -64,7 +64,7 @@ resource "google_compute_health_check" "http_health_check" {
 }
 resource "google_compute_instance_group" "instance_group" {
   name        = "myinstancegrp"
-  description = "${var.service_name} Unmanaged Instance Group"
+  description = "Unmanaged Instance Group"
   instances = [
     data.google_compute_instance.instance.self_link,
   ]
