@@ -18,7 +18,7 @@ resource "google_compute_target_http_proxy" "webserver_lb" {
   url_map = google_compute_url_map.url_map.id
 }
 resource "google_compute_url_map" "url_map" {
-  name = "{local.prefix}-url-map"
+  name = "${local.prefix}-url-map"
   default_service = google_compute_backend_service.default.id
   host_rule {
     hosts = ["*"]
