@@ -52,7 +52,7 @@ resource "google_compute_instance_group" "webservers_lb_instancegroup" {
   description = "Terraform test instance group"
 
   instances = [
-    output.webserver_lb_id
+    module.webserver_instance.webserver_lb_id
   ]
   named_port {
     name = "http"
