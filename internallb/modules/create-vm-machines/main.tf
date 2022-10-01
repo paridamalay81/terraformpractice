@@ -5,7 +5,7 @@ resource "google_compute_instance" "vm-machines" {
   tags = ["webserver"]
   count = length(var.instance_name)
   metadata = {
-    ssh-keys="${var.username}:${var.key-ssh}"
+    ssh-keys="${var.username}:${file("~/.ssh/id_rsa.pub")}"
   }
   boot_disk {
     initialize_params {
@@ -39,4 +39,7 @@ resource "google_compute_instance" "vm-machines" {
   }
 
   source_tags = ["webserver"]
+}
+output "webserver_lb_id" {
+  value = google_compute_instance.vm-machines.id
 }
