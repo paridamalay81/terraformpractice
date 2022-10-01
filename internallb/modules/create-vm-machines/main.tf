@@ -41,5 +41,5 @@ resource "google_compute_instance" "vm-machines" {
   source_tags = ["webserver"]
 }
 output "webserver_lb_id" {
-  value = google_compute_instance.vm-machines.id
+  value = google_compute_instance.vm-machines[0].id
 }
