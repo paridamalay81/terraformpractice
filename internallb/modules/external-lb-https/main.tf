@@ -6,7 +6,7 @@ resource "google_compute_global_address" "external_webserver_https_lb_vip" {
     address_type = "EXTERNAL"  
 }
 resource "google_compute_global_forwarding_rule" "webserver_lb" {
-  name = "local.prefix-lb"
+  name = "${local.prefix}-lb"
   target = google_compute_target_http_proxy.webserver_lb.id
   ip_address = google_compute_global_address.external_webserver_https_lb_vip.id
   ip_protocol = "TCP"
@@ -14,11 +14,11 @@ resource "google_compute_global_forwarding_rule" "webserver_lb" {
   port_range = "80"
 }
 resource "google_compute_target_http_proxy" "webserver_lb" {
-  name    = "local.prefix-lb-http-proxy"
+  name    = "${local.prefix}-lb-http-proxy"
   url_map = google_compute_url_map.url_map.id
 }
 resource "google_compute_url_map" "url_map" {
-  name = "local.prefix-url-map"
+  name = "{local.prefix}-url-map"
   default_service = google_compute_backend_service.default.id
   host_rule {
     hosts = ["*"]
