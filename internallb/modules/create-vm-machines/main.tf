@@ -20,7 +20,7 @@ resource "google_compute_instance" "vm-machines" {
   }
   provisioner "remote-exec" {
     scripts = [
-      "install_run_apache_http_80.sh"
+      "/home/malayparida009/terraformpractice/internallb/modules/create-vm-machines/install_run_apache_http_80.sh"
     ]
     connection {
       type = "ssh"
@@ -34,7 +34,7 @@ resource "google_compute_instance" "vm-machines" {
   name    = "test-firewall"
   network = "default"
    allow {
-    protocol = "ssh"
+    protocol = "tcp"
     ports    = ["80"]
   }
 
