@@ -26,6 +26,7 @@ resource "google_compute_url_map" "url_map" {
   }
   path_matcher {
     name = "allpaths"
+    default_service = google_compute_backend_service.default.id
     path_rule {
       paths = ["/"]
       service = google_compute_backend_service.default.id
