@@ -15,10 +15,11 @@ resource "google_compute_global_forwarding_rule" "webserver_lb" {
 }
 resource "google_compute_target_http_proxy" "webserver_lb" {
   name    = "local.prefix-lb-http-proxy"
-  url_map = google_compute_url_map.default.id
+  url_map = google_compute_url_map.url_map.id
 }
 resource "google_compute_url_map" "url_map" {
   name = "local.prefix-url-map"
+  default_service = google_compute_backend_service.default.id
   host_rule {
     hosts = ["*"]
     path_matcher = "allpaths"
@@ -27,7 +28,7 @@ resource "google_compute_url_map" "url_map" {
     name = "allpaths"
     path_rule {
       paths = ["/"]
-      service = oogle_compute_backend_service.default
+      service = google_compute_backend_service.default.id
     }
   }
 }
@@ -47,16 +48,17 @@ resource "google_compute_http_health_check" "default" {
   timeout_sec        = 1
 }
 resource "google_compute_instance_group" "webservers_lb_instancegroup" {
-  name        = "local.prefix-instancegroup"
+  name        = "instancegroup-lb"
   description = "Terraform test instance group"
 
   instances = [
-    google_compute_instance.webserver_instance.id
+    module.webserver_instance.instance_id
   ]
   named_port {
     name = "http"
     port = "80"
   }
+zone = "us-central1-a"
 
 }
 module "webserver_instance" {
