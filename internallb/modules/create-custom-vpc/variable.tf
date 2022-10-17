@@ -1,9 +1,9 @@
 variable "environment" {
-    type = "string"
+    type = string
     default = "dev"
 }
 variable "subnets" {
-  type = "map"
+  type = map
   default = {
     "dev-us-east1" = "10.0.1.0/28"
     "dev-us-central" = "10.0.2.0/28"
@@ -12,7 +12,7 @@ variable "subnets" {
   }
 }
 variable "spec_region" {
-  type = "string"
+  type = string
   validation {
     condition = ! (var.spec_region == "us-east1" ||  var.spec_region == "us-central1")
     error_message = "Region should be us-east1/us-central1"
