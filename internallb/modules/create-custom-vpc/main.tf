@@ -1,5 +1,5 @@
 locals {
-  subnet-range = lookup(var.subnets,"${var.environment}-${var.spec_region}")
+  subnet-range = lookup(var.subnets,"${var.environment}"-"${var.spec_region}")
 }
 resource "google_compute_network" "custom_network" {
   name                    = "custom-network"
