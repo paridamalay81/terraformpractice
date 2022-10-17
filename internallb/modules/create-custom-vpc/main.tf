@@ -9,5 +9,5 @@ resource "google_compute_subnetwork" "custom_network_subnetwork" {
   name          = "custom_network_subnetwork-${var.environment}"
   ip_cidr_range = local.subnet-range
   region        = var.region
-  network       = google_compute_network.custom-network.id
+  network       = google_compute_network.custom_network.id
  }
