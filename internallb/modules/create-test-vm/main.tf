@@ -23,7 +23,7 @@ resource "google_compute_instance_template" "as2_instance" {
 }
 
 resource "google_compute_instance_from_template" "instance1" {
-  name                     = list(var.instance_list,0)
+  name                     = element(var.instance_list,0)
   zone                     = local.zone.instance1
   source_instance_template = google_compute_instance_template.as2_instance.id
 
