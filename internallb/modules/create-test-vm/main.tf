@@ -11,7 +11,7 @@ resource "google_compute_instance_template" "as2_instance" {
   machine_type = "n2-standard-8"
   tags = ["as2-dev"]
   disk {
-    source_image = var.test-remote-engine-source-image
+    source_image = "centos-7-v20220303"
     disk_size_gb = "32"
     auto_delete  = true
     boot         = true
@@ -26,7 +26,7 @@ resource "google_compute_instance_from_template" "instance1" {
   
 }
 
-resource "google_compute_instance_from_template" "instance1" {
+resource "google_compute_instance_from_template" "instance2" {
   name                     = "test-remote-engine"
   zone                     = local.instance2
   source_instance_template = google_compute_instance_template.as2_instance.id
