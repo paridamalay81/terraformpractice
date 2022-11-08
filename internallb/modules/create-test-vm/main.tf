@@ -20,7 +20,7 @@ resource "google_compute_instance_template" "as2_instance_template1" {
   tags = ["as2-appserver-dev"]
 
   network_interface {
-    subnetwork = "${local.subnetworks}.${local.instance_name1}"
+    subnetwork = "default"
   }
 
   disk {
