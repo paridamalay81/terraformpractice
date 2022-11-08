@@ -20,7 +20,7 @@ resource "google_compute_instance_template" "as2_instance" {
 
 resource "google_compute_instance_from_template" "instance1" {
   name                     = "test-remote-engine"
-  zone                     = local.instance1
+  zone                     = local.zone.instance1
   source_instance_template = google_compute_instance_template.as2_instance.id
 
   
@@ -28,7 +28,7 @@ resource "google_compute_instance_from_template" "instance1" {
 
 resource "google_compute_instance_from_template" "instance2" {
   name                     = "test-remote-engine"
-  zone                     = local.instance2
+  zone                     = local.zone.instance2
   source_instance_template = google_compute_instance_template.as2_instance.id
 
   
