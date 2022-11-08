@@ -1,1 +1,1 @@
-["instancemk1","instancemk2"]
+instance_list=["instancemk1","instancemk2"]
