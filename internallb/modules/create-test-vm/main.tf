@@ -20,6 +20,7 @@ resource "google_compute_instance_template" "as2_instance" {
     subnetwork = "default"
     
   }
+}
 
 resource "google_compute_instance_from_template" "instance1" {
   name                     = "test-remote-engine"
