@@ -8,7 +8,7 @@ resource "google_compute_instance_template" "as2_instance" {
   //name_prefix  = "remote-engine-"
   description  = "This template will be used for creating AS2 application RHEL7.9 instances"
   //machine_type = "n1-standard-8"
-  machine_type = "n2-standard-8"
+  machine_type = "e2-micro"
   tags = ["as2-dev"]
   disk {
     source_image = "centos-7-v20220303"
