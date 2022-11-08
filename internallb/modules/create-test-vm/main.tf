@@ -2,12 +2,12 @@ locals {
     instance_name1 = element(var.instance_list,0)
     instance_name2 = element(var.instance_list,1)
     zone = {
-        local.instance_name1 = "us-central1-a"
-        local.instance_name2 = "us-east4-c"
+        "local.instance_name1" = "us-central1-a"
+        "local.instance_name2" = "us-east4-c"
     }
     regions = {
-        local.instance_name1 =  "us-central1"
-        local.instance_name2 = "us-east4"
+        "local.instance_name1" =  "us-central1"
+        "local.instance_name2" = "us-east4"
     }
 }
 
