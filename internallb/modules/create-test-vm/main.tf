@@ -16,6 +16,9 @@ resource "google_compute_instance_template" "as2_instance" {
     auto_delete  = true
     boot         = true
   }
+  network_interface {
+    
+  }
 }
 
 resource "google_compute_instance_from_template" "instance1" {
