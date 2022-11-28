@@ -8,7 +8,7 @@ resource "google_compute_instance" "vm-machines" {
   tags = [local.myname]
   count = length(var.instance_list)
   labels = {
-    local.myname = "true"
+    (local.myname) = "true"
   }
   boot_disk {
     initialize_params {
