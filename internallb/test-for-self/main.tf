@@ -6,7 +6,7 @@ resource "google_compute_instance" "vm-machines" {
   machine_type = "e2-medium"
   zone = "us-central1-a"
   tags = [local.myname]
-  count = length(var.instance_name)
+  count = length(var.instance_list)
   labels = {
     local.myname = "true"
   }
