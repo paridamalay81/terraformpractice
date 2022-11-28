@@ -7,9 +7,6 @@ resource "google_compute_instance" "vm-machines" {
   zone = "us-central1-a"
   tags = [local.myname]
   count = length(var.instance_name)
-  metadata = {
-    ssh-keys="${var.username}:${file("~/.ssh/id_rsa.pub")}"
-  }
   labels = {
     local.myname = "true"
   }
