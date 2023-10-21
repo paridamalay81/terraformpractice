@@ -23,7 +23,7 @@ resource "google_compute_instance" "app-server" {
   }
 }
 resource "google_service_account_iam_member" "gce-default-account-iam" {
-  service_account_id = data.google_service_account.app-server-sa.name
+  service_account_id = google_service_account.app-server-sa.name
   role               = "roles/storage.admin"
   member             = google_service_account.app-server-sa.email
 }
