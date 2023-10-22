@@ -27,3 +27,8 @@ resource "google_service_account_iam_member" "gce-default-account-iam" {
   role               = "roles/storage.admin"
   member             = google_service_account.app-server-sa.email
 }
+resource "google_service_account_iam_member" "gce-default-account-iam-role  " {
+  service_account_id = google_service_account.app-server-sa.name
+  role               = "roles/resourcemanager.projectIamAdmin"
+  member             = google_service_account.app-server-sa.email
+}
