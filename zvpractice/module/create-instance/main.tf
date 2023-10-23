@@ -22,10 +22,10 @@ resource "google_compute_instance" "app-server" {
     network = "default"
   }
 }
-resource "google_service_account_iam_member" "gce-default-account-iam" {
-  service_account_id = google_service_account.app-server-sa.name
-  role               = "roles/storage.admin"
-  member             = google_service_account.app-server-sa.email
+resource "google_project_iam_member" "gce-default-account-iam" {
+  project = "wise-shell-330415"  
+  role               = "roles/secretmanager.admin"
+  member             ="serviceAccount:${google_service_account.app-server-sa.email}"
 }
 resource "google_service_account_iam_member" "gce-default-account-iam-role  " {
   service_account_id = google_service_account.app-server-sa.name
