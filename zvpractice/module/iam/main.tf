@@ -14,6 +14,6 @@ output "pro_policy" {
   value = data.google_project_iam_policy.pro_policy
 }
 resource "google_service_account" "app-server-sa" {
-  account_id   = "app-server-sa"
+  account_id   = "app-server-sa-new"
   display_name = "A service account that create for storage"
 }
