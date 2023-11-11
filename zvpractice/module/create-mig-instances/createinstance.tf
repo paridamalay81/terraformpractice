@@ -20,6 +20,7 @@ resource "google_compute_region_instance_template" "app_server_templates" {
 resource "google_compute_instance_group_manager" "app_server_group" {
   name="app-server-grp"
   base_instance_name = "app-server"
+  zone = "us-central1-a"
   version {
     name = "appserver"
     instance_template = google_compute_region_instance_template.app_server_templates.id
