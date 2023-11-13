@@ -6,7 +6,7 @@ variable "disk_prod_tst" {
   }  
 }
 locals {
-  local-disk=[for disk,prop-list in var.disk_prod_tst:upper(disk)]
+  local-disk={for disk,prop-list in var.disk_prod_tst:upper(disk)=> disk}
 }
 output "disk_prod" {
   value = local.local-disk
