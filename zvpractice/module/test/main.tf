@@ -1,22 +1,19 @@
-variable "iam-user-policy-map" {
+variable "disk_prod_tst" {
+  type = map(any)
   default = {
-    "user 1" = ["policy1", "policy2"],
-    "user 2" = ["policy1"]
-  }
+    disk1 = ["pd-ssd","80","us-central1-a"]
+    disk2 = ["pd-ssd","180","us-central1-a"]
+  }  
 }
-
+variable "prod-test-types" {
+  type = list
+  default = ["disk-type","disk-size","zone"]
+}
 locals {
-  association-map = merge([
-    for user, policies in var.iam-user-policy-map : {
-      for policy in policies :
-        "${user}-${policy}" => {
-          "user"   = user
-          "policy" = policy
-        }
-    }
-  ]...)
+  local-disk={
+    for disk,disk-prop-list in var.disk_prod_tst:disk=>concat(var.prod-test-types,disk-prop-list)           
 }
-
-output "association-map" {
-  value = local.association-map
+}
+output "disk_prod" {
+  value = local.local-disk
 }
