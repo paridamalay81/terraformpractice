@@ -4,7 +4,9 @@ provider "google" {
 }
 locals {
   machine_type = lookup(var.machine_type,var.environment)
+  #disk_lst_prd = 
 }
+
 resource "google_compute_region_instance_template" "app_server_templates" {
   name           = "appserver-template"
   machine_type   = local.machine_type
@@ -27,3 +29,8 @@ resource "google_compute_instance_group_manager" "app_server_group" {
   }
   target_size = 2
 }
+#resource "google_compute_disk" "app_server_vm_additional_disk" {
+ # name = "addition-disk"
+  #count = var.environment != "prod" ? 0 : 1
+
+#}
