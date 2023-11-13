@@ -11,7 +11,7 @@ variable "prod-test-types" {
 }
 locals {
   local-disk={
-    for disk,disk-prop-list in var.disk_prod_tst:disk=>concat(var.prod-test-types,disk-prop-list)           
+    for disk,disk-prop-list in var.disk_prod_tst:disk=>zipmap(var.prod-test-types,disk-prop-list)           
 }
 }
 output "disk_prod" {
