@@ -10,7 +10,7 @@ variable "var_env" {
   }
 }
 locals{
-    env="prod"
+    env="dev"
     disk_count=local.env=="prod"?lookup(var.var_env,local.env):lookup(var.var_env,local.env)
 }
 output "diskcount" {
