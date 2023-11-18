@@ -9,7 +9,7 @@ locals {
   }
   disk_prod_attr = ["type","size","zone"] 
     disk_attributes={
-        for m,v in local.disk_prod:a=>v
+        for m,v in local.disk_prod_attr:"a"=>v
     }
 }
 output "disk_attr_map" {
