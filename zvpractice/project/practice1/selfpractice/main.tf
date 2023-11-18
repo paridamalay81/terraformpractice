@@ -2,8 +2,7 @@ provider "google" {
   project     = "wise-shell-330415"
   region      = "us-central1"
 }
-locals {
-  machine_type = lookup(var.machine_type,var.environment)
+locals {  
   disk_prod = {   
     disk1 = ["pd-ssd","80","us-central1-a"]
     disk2 = ["pd-ssd","180","us-central1-a"]
