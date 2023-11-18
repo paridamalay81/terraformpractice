@@ -10,7 +10,7 @@ locals {
   }
   disk_prod_attr = ["type","size","zone"] 
   prod_disk_helper={    
-    for disk,disk_attr in local.disk_prod_attr:disk=>zipmap(toset(local.disk_prod_attr),disk_attr)    
+    for disk,disk_attr in local.disk_prod:disk=>zipmap(local.disk_prod_attr,disk_attr)    
   }
 }
 output "disk_attr_map" {
