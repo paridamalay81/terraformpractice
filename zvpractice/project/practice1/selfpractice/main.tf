@@ -8,8 +8,10 @@ locals {
     disk2 = ["pd-ssd","180","us-central1-a"]
   }
   disk_prod_attr = ["type","size","zone"] 
- 
+    disk_attributes={
+        for m,v in local.disk_prod:a=>v
+    }
 }
 output "disk_attr_map" {
-  value = local.disk_prod_attr
+  value = local.disk_attributes
 }
