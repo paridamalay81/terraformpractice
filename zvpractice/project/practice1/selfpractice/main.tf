@@ -26,7 +26,7 @@ resource "google_compute_disk" "compute_disk"{
   output "cdisk" {
   value=google_compute_disk.compute_disk
 }
-/*
+
 resource "google_compute_instance" "instance_web" {
   name = "test-temp-instance"
   machine_type = "n2-standard-2"
@@ -44,8 +44,7 @@ resource "google_compute_instance" "instance_web" {
   dynamic "attached_disk" {
     for_each = [for disk in google_compute_disk.compute_disk:disk]
     content {
-      source = disk.id
+      source = attached_disk.id
     }    
   }
 }
-*/
