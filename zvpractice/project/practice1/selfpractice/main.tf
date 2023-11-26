@@ -26,6 +26,7 @@ resource "google_compute_disk" "compute_disk"{
   output "cdisk" {
   value=google_compute_disk.compute_disk
 }
+/*
 resource "google_compute_instance" "instance_web" {
   name = "test-temp-instance"
   machine_type = "n2-standard-2"
