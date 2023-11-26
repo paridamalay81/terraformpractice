@@ -41,7 +41,7 @@ resource "google_compute_instance" "instance_web" {
     }
   }
   dynamic "attached_disk" {
-    for_each = google_compute_disk.compute_disk
+    for_each = [for disk in google_compute_disk.compute_disk:disk]
     content {
       source = each.key.id
     }    
