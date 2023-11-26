@@ -48,3 +48,4 @@ resource "google_compute_instance" "instance_web" {
     }    
   }
 }
+*/
