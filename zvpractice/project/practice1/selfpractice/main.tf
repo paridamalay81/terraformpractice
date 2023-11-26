@@ -43,7 +43,7 @@ resource "google_compute_instance" "instance_web" {
   dynamic "attached_disk" {
     for_each = [google_compute_disk.compute_disk]
     content {
-      source = each.name
+      source = each.value
     }    
   }
 }
