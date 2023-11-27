@@ -30,6 +30,7 @@ resource "google_compute_disk" "compute_disk"{
 resource "google_compute_instance" "instance_web" {
   name = "test-temp-instance"
   machine_type = "n2-standard-2"
+  zone  = "us-central1-a"
   network_interface {
     network = "default"
   }
