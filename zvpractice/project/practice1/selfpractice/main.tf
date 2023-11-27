@@ -18,7 +18,7 @@ output "diskcount" {
 }
 resource "google_compute_disk" "compute_disk"{
   count = local.disk_count
-  name = "compute_disk${count.index}"
+  name = "compute-disk${count.index}"
   type  = "pd-ssd"
   zone  = "us-central1-a"
   size = 60
