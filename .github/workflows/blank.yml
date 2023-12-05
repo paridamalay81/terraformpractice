@@ -6,6 +6,7 @@ on:
     inputs:
       environment:
         description: "the env"
+        type: choice
         options:
           - "prod"
           - "dev"
