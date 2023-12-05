@@ -20,3 +20,6 @@ jobs:
           version: '>= 363.0.0'
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
+      - name: Fetching vm instances
+        run: |
+          gcloud compute instances list --project "wise-shell-330415" --zones "us-central1-a"
