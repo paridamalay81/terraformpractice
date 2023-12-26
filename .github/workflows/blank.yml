@@ -21,7 +21,7 @@ jobs:
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
       - name: Activate authentication account
-        run: gcloud auth activate-service-account ${{ secrets.GCP_ACCOUNT }} --key-file=key.json
+        run: gcloud auth activate-service-account ${{ secrets.GCP_ACCOUNT }} --key-file=./.github/workflows/key.json
       - name: Setting authentication account
         run: gcloud config set account ${{ secrets.GCP_ACCOUNT }}
       - name: Fetching vm instances
