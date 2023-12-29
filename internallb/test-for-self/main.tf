@@ -1,5 +1,5 @@
 locals {
-  myname="webservers_app"
+  myname="wbserver1"
 }
 resource "google_compute_instance" "vm-machines" {
   name = "vm-instance-${count.index}"
