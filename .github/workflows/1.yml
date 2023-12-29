@@ -12,3 +12,4 @@ jobs:
       - name: create a values
         run: | 
          expr 3+7 > t1.txt
+         echo "ggod values"
