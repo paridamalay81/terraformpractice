@@ -1,0 +1,14 @@
+---
+name: check output
+on:
+  push:
+     branches:
+        - main
+run-name: check output values
+jobs:
+  check_output:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create a values
+        run: | 
+         expr 3+7 > t1.txt
