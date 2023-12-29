@@ -3,7 +3,7 @@ name: check output
 on:
   push:
      branches:
-        - main
+        - master
 run-name: check output values
 jobs:
   check_output:
