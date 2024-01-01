@@ -10,7 +10,7 @@ jobs:
         - name: create output variable
           id: create_output
           run: | 
-            expr 3+7>test.txt
+            expr 3 + 7>test.txt
             echo "$(cat test.txt)"
             echo "a1=$(cat test.txt)" >> "$GITHUB_OUTPUT"
         - name: Print output variable
