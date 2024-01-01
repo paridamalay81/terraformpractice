@@ -1,0 +1,17 @@
+---
+name: Check output values
+run-name: Check and use outpit
+on: 
+  workflow_dispatch:
+jobs:
+  output_test:   
+      runs-on: ubuntu-latest
+      steps:
+        - name: create output variable
+          id: create_output
+          run: | 
+            expr 3+7>test.txt
+            echo "a1=cat test.txt" >> "$GITHUB_OUTPUT"
+        - name: Print output variable
+          run: |
+            echo  ${{ steps.create_output.outputs.a1 }}
