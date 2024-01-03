@@ -13,4 +13,8 @@ variable "vm_source_image" {
   type = string
   default = "Need to enter"
 }
+variable "vm_source_image" {
+  type = string
+  default = "Need to enter"
+}
 #Variables for creating AS2 instances
