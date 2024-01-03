@@ -1,0 +1,25 @@
+---
+name: check pull request
+run-name: checking pull requset
+on:
+  pull_request:    
+    types:  [closed]    
+jobs:
+  check_file_merged:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloning all files
+        id: clone_repo
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: printing_diff
+        shell: bash
+        run: |
+          git fetch origin master
+          git diff origin/master..HEAD > mydiff
+          echo "mydiff = "
+          cat mydiff
+
+
+
