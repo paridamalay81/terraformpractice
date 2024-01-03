@@ -17,7 +17,7 @@ jobs:
         shell: bash
         run: |
           git fetch origin master
-          git diff origin/master..HEAD > mydiff
+          git diff HEAD^ HEAD --name-only > mydiff
           echo "mydiff = "
           cat mydiff
 
