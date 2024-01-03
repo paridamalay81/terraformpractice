@@ -3,7 +3,7 @@ name: check pull request
 run-name: checking pull requset
 on:
   pull_request:    
-    types:  [closed]    
+    types:  [opened]    
 jobs:
   check_file_merged:
     runs-on: ubuntu-latest
