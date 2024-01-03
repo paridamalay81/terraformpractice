@@ -16,7 +16,7 @@ resource "google_compute_instance" "vm-machines" {
     }
   }
   network_interface {
-    network = "default"
+    network = "default1"
     access_config {
 
     }

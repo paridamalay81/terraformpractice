@@ -13,7 +13,7 @@ variable "vm_source_image" {
   type = string
   default = "Need to enter"
 }
-variable "vm_source_image2" {
+variable "vm_source_image3" {
   type = string
   default = "Need to enter"
 }
