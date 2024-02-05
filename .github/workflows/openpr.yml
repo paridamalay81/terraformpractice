@@ -5,7 +5,7 @@ on:
   pull_request:    
     types:  [closed]
     paths:
-      - './.github/workflows/*'
+      - './.github/workflows/**'
 jobs:
   check_file_merged:
     runs-on: ubuntu-latest
