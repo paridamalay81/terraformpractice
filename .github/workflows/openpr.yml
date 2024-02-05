@@ -4,9 +4,6 @@ run-name: checking pull requset
 on:
   pull_request:    
     types:  [closed]
-    paths:
-      - '!*.tf'
-
 jobs:
   check_file_merged:
     runs-on: ubuntu-latest
