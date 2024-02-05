@@ -4,6 +4,8 @@ run-name: checking pull requset
 on:
   pull_request:    
     types:  [closed]
+    paths:
+      - './.github/workflows/*'
 jobs:
   check_file_merged:
     runs-on: ubuntu-latest
