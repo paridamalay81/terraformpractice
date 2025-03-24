@@ -9,3 +9,9 @@ jobs:
        uses: actions/checkout@v3
        with:
           ref: 'master'
+     - name: Getting file differences
+       shell: bash
+       run: |
+          echo "File List is.............."
+          git ls-tree File -r branch
+          echo "File List is..............Completed"
