@@ -13,5 +13,5 @@ jobs:
        shell: bash
        run: |
           echo "File List is.............."
-          git ls-tree File -r branch
+          git ls-tree -r --name-only
           echo "File List is..............Completed"
