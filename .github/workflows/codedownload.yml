@@ -13,5 +13,6 @@ jobs:
        shell: bash
        run: |
           echo "File List is.............."
-          git ls-tree -r --name-only
+          git ls-tree -r --name-only master > filediff.txt
           echo "File List is..............Completed"
+          cat filediff.txt
