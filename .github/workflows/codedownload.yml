@@ -15,5 +15,5 @@ jobs:
        run: |
           echo "File List is.............."
           echo "$GITHUB_WORKSPACE"
-          git ls-tree -r --name-only |grep "abcdef.txt|codedownload.yml">filepath.txt
+          git ls-tree -r --name-only master|grep "abcdef.txt|codedownload.yml">filepath.txt
           cat filepath.txt
