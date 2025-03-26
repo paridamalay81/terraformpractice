@@ -17,3 +17,6 @@ locals {
 output "disk_prod" {
   value = local.local-disk
 }
+output "disk_prod_newly_added" {
+  value = local.local-disk
+}

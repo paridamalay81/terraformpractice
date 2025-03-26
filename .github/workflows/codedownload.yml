@@ -13,8 +13,11 @@ jobs:
        shell: bash
        run: |
           echo "File List is.............."
-          git ls-tree -r --name-only master > filediff.txt
+          git checkout main
+          git diff ^head head > filediff.txt
           echo "File List is..............Completed"
           cat filediff.txt
-          echo $(pwd)
-          echo $(ls -lrt)
+          while read LINE  
+          do  
+            echo $LINE  
+          done < filediff.txt      
