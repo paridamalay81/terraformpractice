@@ -13,7 +13,8 @@ jobs:
        shell: bash
        run: |
           echo "File List is.............."
-          git checkout main
+          branch_name=git remote show origin | sed -n '/HEAD branch/s/.*: //p'
+          git checkout $branch_name
           git diff ^head head > filediff.txt
           echo "File List is..............Completed"
           cat filediff.txt
