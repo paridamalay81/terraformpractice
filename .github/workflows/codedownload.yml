@@ -16,7 +16,7 @@ jobs:
           branch_name=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')          
           echo $branch_name
           git checkout $branch_name
-          git diff head^ head > filediff.txt
+          git diff HEAD^ HEAD --name-only > filediff.txt
           echo "File List is..............Completed"
           cat filediff.txt
           while read LINE  
