@@ -13,7 +13,8 @@ jobs:
        shell: bash
        run: |
           echo "File List is.............."
-          branch_name=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
+          #branch_name=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
+          branch_name="abc"
           echo $branch_name
           git checkout $branch_name
           git diff ^head head > filediff.txt
