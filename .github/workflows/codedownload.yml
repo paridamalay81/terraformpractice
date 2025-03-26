@@ -19,5 +19,6 @@ jobs:
           cat filepath.txt
           while read -r file_name_match
           do
+            echo "inside while"
             echo $file_name_match
-          done
+          done<filepath.txt
