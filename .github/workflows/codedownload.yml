@@ -17,3 +17,7 @@ jobs:
           echo "$GITHUB_WORKSPACE"
           git ls-tree -r --name-only master|grep -E 'abcdef.txt|codedownload.yml'>filepath.txt
           cat filepath.txt
+          while read file_name_match
+          do
+            echo $file_name_match
+          done
