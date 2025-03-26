@@ -16,3 +16,5 @@ jobs:
           git ls-tree -r --name-only master > filediff.txt
           echo "File List is..............Completed"
           cat filediff.txt
+          cat $(pwd)
+          cat $(ls -lrt)
