@@ -10,18 +10,10 @@ jobs:
        with:
           ref: 'master'
           fetch-depth: 0
-     - name: Getting file differences
+     - name: Getting files from GIT repo
        shell: bash
        run: |
           echo "File List is.............."
           echo "$GITHUB_WORKSPACE"
-          branch_name=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')          
-          echo $branch_name
-          git checkout $branch_name
-          git diff HEAD^ HEAD --name-only > filediff.txt
-          echo "File List is..............Completed"
-          cat filediff.txt
-          while read LINE  
-          do  
-            echo $LINE  
-          done < filediff.txt      
+          git ls-tree -r --name-only |grep "abcdef.txt|codedownload.yml">filepath.txt
+          cat filepath.txt
